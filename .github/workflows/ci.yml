@@ -1,0 +1,36 @@
+---
+name: "connector-ci"
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Action to perform"
+        required: true
+        type: choice
+        options:
+          - plan
+          - apply
+
+  push:
+    branches:
+      - main
+    paths:
+      - "**.tfvars"
+      - "custom-appsets/**"
+
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+
+jobs:
+  connector-ci:
+    uses: "orbitcluster/oc-terraform-hub-spoke-connector/.github/workflows/main.yml@v1.0.0"
+    with:
+      tfvar_file_path: "connector.tfvars"
+      bucket_name: "oc-backend-hub"
+      approvers: "dilipsamanta, mav-sk"
+      master_s3_directory: "oc-eks-hub"
+      module_ref: "v1.0.0"
+    secrets: inherit
