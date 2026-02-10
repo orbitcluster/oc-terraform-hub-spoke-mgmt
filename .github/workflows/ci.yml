@@ -12,12 +12,12 @@ on:
           - plan
           - apply
 
-  push:
-    branches:
-      - main
-    paths:
-      - "**.tfvars"
-      - "custom-appsets/**"
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "**.tfvars"
+  #     - "custom-appsets/**"
 
 permissions:
   contents: read
