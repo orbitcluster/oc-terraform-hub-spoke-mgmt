@@ -8,8 +8,7 @@ Configuration repository for the OrbitCluster hub-spoke ArgoCD connector. Contai
 oc-terraform-hub-spoke-mgmt/
 ├── .github/workflows/ci.yml      # Calls connector module workflow
 ├── connector.tfvars              # Spoke cluster configuration
-├── custom-appsets/               # Optional custom ApplicationSets
-│   └── example-appset.yaml
+├── connector.tfvars              # Spoke cluster configuration
 └── README.md
 ```
 
@@ -39,16 +38,7 @@ spoke_clusters = {
 }
 ```
 
-### Custom ApplicationSets
 
-Add YAML files to `custom-appsets/` and reference in tfvars:
-```hcl
-custom_appsets = {
-  "my-appset" = {
-    yaml_content = file("${path.module}/custom-appsets/my-appset.yaml")
-  }
-}
-```
 
 ## CI Workflow
 

@@ -15,8 +15,7 @@ github_app_topic = "orbit-deploy"
 # Default ApplicationSets
 ################################################################################
 
-# Enable folder-based ApplicationSets (env/dev, env/qa, env/prod structure)
-enable_folder_structure_appsets = true
+
 
 ################################################################################
 # Spoke Clusters
@@ -60,14 +59,4 @@ spoke_clusters = {
   # }
 }
 
-################################################################################
-# Custom ApplicationSets (optional)
-# Provide your own ApplicationSet YAML configurations
-# These are deployed in addition to the folder-based appsets
-################################################################################
 
-# custom_appsets = {
-#   "my-custom-appset" = {
-#     yaml_content = file("${path.module}/custom-appsets/my-custom-appset.yaml")
-#   }
-# }
