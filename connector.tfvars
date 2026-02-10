@@ -20,7 +20,7 @@ github_app_topic = "testdeploy"
 ################################################################################
 # Spoke Clusters
 # Add your spoke clusters here with their connection details
-# 
+#
 # Required values per cluster:
 #   - cluster_name:    EKS cluster name
 #   - server:          API server endpoint
@@ -58,5 +58,3 @@ spoke_clusters = {
   #   argocd_role_arn = "arn:aws:iam::485646919618:role/prdspk-BU12345-APP67890-eks-argocd-hub-assumable"
   # }
 }
-
-
