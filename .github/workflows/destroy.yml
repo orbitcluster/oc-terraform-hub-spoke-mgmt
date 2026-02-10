@@ -1,0 +1,39 @@
+---
+name: "hub-spoke-mgmt-destroy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: "Type 'destroy' to confirm"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+
+jobs:
+  validate-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate confirmation
+        if: ${{ github.event.inputs.confirm_destroy != 'destroy' }}
+        run: |
+          echo "::error::You must type 'destroy' to confirm the destruction"
+          exit 1
+      - name: Display destroy target
+        run: |
+          echo "🎯 Destroying hub-spoke connector resources"
+
+  connector-destroy:
+    needs: validate-input
+    uses: "orbitcluster/oc-terraform-hub-spoke-connector/.github/workflows/destroy.yml@v1.1.0"
+    with:
+      tfvar_file_path: "connector.tfvars"
+      bucket_name: "oc-backend-hub"
+      approvers: "dilipsamanta, mav-sk"
+      master_s3_directory: "oc-eks-hub"
+      module_ref: "v1.1.0"
+    secrets: inherit

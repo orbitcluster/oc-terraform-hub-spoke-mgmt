@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: custom-team-apps
+  namespace: argocd
+spec:
+  generators:
+    # Example: List generator for specific applications
+    - list:
+        elements:
+          - app: my-app-1
+            cluster: dev-cluster
+            namespace: team-a
+          - app: my-app-2
+            cluster: dev-cluster
+            namespace: team-b
+  template:
+    metadata:
+      name: "{{app}}-{{cluster}}"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/orbitcluster/{{app}}.git"
+        targetRevision: HEAD
+        path: helm
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        name: "{{cluster}}"
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            istio-injection: enabled
