@@ -15,6 +15,8 @@ oc-terraform-hub-spoke-mgmt/
 
 ## Configuration
 
+This repository is configured via `connector.tfvars`.
+
 ### Spoke Clusters
 
 Each spoke cluster needs:
@@ -50,4 +52,5 @@ custom_appsets = {
 
 ## CI Workflow
 
-The workflow calls the reusable workflow from `oc-terraform-hub-spoke-connector`.
+- **CI/CD**: Uses reusable workflows from `oc-terraform-hub-spoke-connector` (referencing `v1.0.0` tag).
+- **Custom ApplicationSets**: Defines appsets for teams (e.g., `custom-team-apps`) with Istio service mesh enabled by default (`istio-injection: enabled`).
